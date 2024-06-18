@@ -1,5 +1,6 @@
 import { useState } from "react";
 import "./App.css";
+import ToDoItem from "./TodoItem";
 
 function App() {
     // Stores the todo inside the input
@@ -27,24 +28,15 @@ function App() {
                 {/* Renders each todo as an li, will be hidden if the isShow is set to false! */}
                 {isShow &&
                     todos.map((todo, index) => (
-                        <li key={index}>
-                            <span>{todo}</span>
-                            {/* To let user freely delete each todo when needed */}
-                            <button
-                                onClick={() => {
-                                    setTodos((prev) => {
-                                        // Create a copy of the previous todos
-                                        const newTodos = [...prev];
-                                        // Remove the todo item
-                                        prev.splice(index, 1);
-                                        // Return the new todo list with removed item
-                                        return newTodos;
-                                    });
-                                }}
-                            >
-                                Delete
-                            </button>
-                        </li>
+                        <ToDoItem key={index} {...{ todo, setTodos, index }} />
+                        // Logically equivalent to
+
+                        // <ToDoItem
+                        //     key={index}
+                        //     todo={todo}
+                        //     setTodos={setTodos}
+                        //     index={index}
+                        // />
                     ))}
             </ul>
         </>
